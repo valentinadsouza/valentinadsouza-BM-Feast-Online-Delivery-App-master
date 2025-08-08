@@ -3,11 +3,6 @@
 
 ---
 
-## 📽️ Demo
-
-> Explore the key features of the **BM-Feast App** in this walkthrough video:
-
-https://github.com/user-attachments/assets/bd12df74-b1e6-4610-bbee-4845f93c775d
 
 
 ## 🧾 Overview
