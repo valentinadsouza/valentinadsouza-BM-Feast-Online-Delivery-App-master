@@ -27,11 +27,11 @@ const Navbar = ({ setShowLogin }) => {
                     <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
                 </div>
 
-                   {/* {isLoggedIn ? (
+                   {isLoggedIn ? (
                     <button onClick={handleLogout}>Logout</button>
                 ) : (
                     <button onClick={() => setShowLogin(true)}>Sign In</button>
-                )} */}
+                )}
      
 
             </div>
