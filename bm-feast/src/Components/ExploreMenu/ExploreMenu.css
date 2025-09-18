@@ -1,4 +1,420 @@
+/* ===============================
+    Explore Menu Container
+=============================== */
 .explore-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-search {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px 12px;
+    margin: 10px 0 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.no-results {
+    padding: 20px;
+    font-style: italic;
+    color: #888;
+}
+
+/* Background animation */
+.explore-menu::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,165,0,0.05), transparent);
+    transition: left 1s ease;
+    pointer-events: none;
+}
+
+.explore-menu:hover::before {
+    left: 100%;
+}
+
+/* ===============================
+    Heading
+=============================== */
+.explore-menu h1 {
+    color: #262626;
+    font-weight: 500;
+    font-size: 2rem;
+    position: relative;
+    cursor: default;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.23,1,0.32,1);
+}
+
+.explore-menu h1::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -100%;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #ff6b6b, #ffa500, #4ecdc4);
+    transition: left 0.8s cubic-bezier(0.23,1,0.32,1);
+}
+
+.explore-menu h1:hover::before {
+    left: 100%;
+}
+
+.explore-menu h1:hover {
+    transform: translateY(-3px) scale(1.02);
+    color: #1a1a1a;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+}
+
+/* ===============================
+    Subtext
+=============================== */
+.explore-menu-text {
+    max-width: 60%;
+    color: #808080;
+    font-size: 1rem;
+    line-height: 1.5;
+    transition: all 0.6s cubic-bezier(0.23,1,0.32,1);
+    cursor: default;
+}
+
+.explore-menu-text:hover {
+    color: #666;
+    transform: translateX(5px);
+}
+
+/* ===============================
+    Scrollable Menu Container
+=============================== */
+.menu-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    width: 100%;
+}
+
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.scroll-btn:hover {
+    background: #fff;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    transform: translateY(-50%) scale(1.1);
+    color: #000;
+}
+
+.scroll-btn:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.left-btn { left: 0; }
+.right-btn { right: 0; }
+
+/* ===============================
+    Menu List
+=============================== */
+.explore-menu-list {
+    display: flex;
+    gap: 20px;
+    text-align: center;
+    margin: 0 60px; /* Space for buttons */
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 20px 10px;
+    position: relative;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(0,0,0,0.02));
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.explore-menu-list::-webkit-scrollbar { display: none; }
+
+/* Floating particles */
+.explore-menu-list::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image:
+        radial-gradient(circle at 15% 25%, rgba(255,165,0,0.1) 1px, transparent 1px),
+        radial-gradient(circle at 85% 75%, rgba(255,165,0,0.08) 1px, transparent 1px),
+        radial-gradient(circle at 45% 15%, rgba(255,165,0,0.12) 1px, transparent 1px);
+    background-size: 80px 80px, 120px 120px, 60px 60px;
+    opacity: 0;
+    animation: menuFloat 8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.explore-menu-list:hover::after { opacity: 1; }
+
+/* ===============================
+    Menu Item
+=============================== */
+.explore-menu-list-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.6s cubic-bezier(0.23,1,0.32,1);
+    padding: 15px;
+    border-radius: 20px;
+    position: relative;
+    min-width: fit-content;
+    flex-shrink: 0;
+}
+
+/* Background glow */
+.explore-menu-list-item::before {
+    content: '';
+    position: absolute;
+    top:0; left:0; right:0; bottom:0;
+    background: radial-gradient(circle at center, rgba(255,165,0,0.1), transparent);
+    border-radius: 20px;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.6s cubic-bezier(0.23,1,0.32,1);
+    z-index: -1;
+}
+
+.explore-menu-list-item:hover::before {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Hover effects */
+.explore-menu-list-item:hover {
+    transform: translateY(-15px) scale(1.1);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15), 0 10px 20px rgba(255,165,0,0.2);
+    z-index: 10;
+}
+
+.explore-menu-list-item img {
+    width: 7.5vw;
+    min-width: 80px;
+    max-width: 100px;
+    border-radius: 50%;
+    transition: all 0.6s cubic-bezier(0.23,1,0.32,1);
+}
+
+.explore-menu-list-item:hover img {
+    transform: scale(1.2) rotateY(10deg);
+    filter: brightness(1.1) saturate(1.2);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2), 0 0 20px rgba(255,165,0,0.3);
+}
+
+/* Text hover & underline */
+.explore-menu-list-item p {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    position: relative;
+}
+
+.explore-menu-list-item p::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ff6b6b, #ffa500, #4ecdc4);
+    transition: all 0.6s cubic-bezier(0.23,1,0.32,1);
+    border-radius: 2px;
+}
+
+.explore-menu-list-item:hover p::after {
+    width: 100%;
+    left: 0%;
+}
+
+.explore-menu-list-item:hover p { color: #333; transform: translateY(-2px); }
+
+/* Active menu item */
+.explore-menu-list-item.active {
+    border: 4px solid tomato;
+    background: linear-gradient(45deg, rgba(255,99,71,0.1), rgba(255,165,0,0.1));
+    border-radius: 20px;
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(255,99,71,0.3), 0 5px 15px rgba(0,0,0,0.1);
+    animation: activeGlow 2s ease-in-out infinite alternate;
+}
+
+.explore-menu-list-item.active img {
+    filter: brightness(1.1) saturate(1.2);
+    box-shadow: 0 10px 20px rgba(255,99,71,0.4);
+}
+
+/* HR line */
+.explore-menu hr {
+    margin: 10px 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #e2e2e2, transparent);
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.explore-menu hr::before {
+    content: '';
+    position: absolute;
+    top:0; left:-100%;
+    width: 50%; height:100%;
+    background: linear-gradient(90deg, transparent, rgba(255,165,0,0.6), transparent);
+    transition: left 1s ease;
+}
+
+.explore-menu:hover hr::before { left: 100%; }
+
+/* ===============================
+    Keyframe Animations
+=============================== */
+@keyframes menuFloat {
+    0%,100% { transform: translateY(0px) rotate(0deg); opacity:0.3; }
+    33% { transform: translateY(-5px) rotate(1deg); opacity:0.6; }
+    66% { transform: translateY(-2px) rotate(-1deg); opacity:0.4; }
+}
+
+@keyframes activeGlow {
+    0% { box-shadow: 0 10px 25px rgba(255,99,71,0.3), 0 5px 15px rgba(0,0,0,0.1); }
+    100% { box-shadow: 0 15px 35px rgba(255,99,71,0.5), 0 8px 25px rgba(0,0,0,0.2); }
+}
+
+
+.explore-menu-list-item:hover {
+    animation: magneticFloat 2s ease-in-out infinite;
+}
+
+/* Tablet View */
+@media (max-width: 768px) {
+    .explore-menu h1 {
+        font-size: 1.6rem;
+    }
+
+    .explore-menu-text {
+        max-width: 100%;
+        font-size: 0.95rem;
+    }
+
+    .explore-menu-list {
+        padding: 15px 5px;
+        gap: 15px;
+        margin: 0 50px;
+        width: calc(100% - 100px);
+    }
+
+    .explore-menu-list img {
+        width: 14vw;
+        min-width: 70px;
+    }
+
+    .explore-menu-list p {
+        font-size: 14px;
+    }
+
+    .scroll-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+    }
+
+    /* Reduced effects for tablet */
+    .explore-menu-list-item:hover {
+        transform: translateY(-10px) scale(1.05);
+        animation: none;
+    }
+
+    .explore-menu-list-item:hover img {
+        transform: scale(1.15) translateZ(10px);
+    }
+}
+
+/* Mobile View */
+@media (max-width: 480px) {
+    .explore-menu h1 {
+        font-size: 1.4rem;
+        text-align: center;
+    }
+
+    .explore-menu-text {
+        font-size: 0.9rem;
+        text-align: center;
+        max-width: 100%;
+    }
+
+    .explore-menu-list {
+        gap: 12px;
+        padding: 10px 5px;
+        margin: 0 40px;
+        width: calc(100% - 80px);
+    }
+
+    .explore-menu-list img {
+        width: 16vw;
+        min-width: 60px;
+    }
+
+    .explore-menu-list p {
+        font-size: 13px;
+    }
+
+    .scroll-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+
+    /* Simplified mobile effects */
+    .explore-menu-list-item:hover {
+        transform: translateY(-5px) scale(1.03);
+        animation: none;
+    }
+
+    .explore-menu-list-item:hover img {
+        transform: scale(1.1);
+        filter: brightness(1.05);
+    }
+
+    .explore-menu-list-item::before {
+        display: none;
+    }
+
+    .explore-menu-list::after {
+        display: none;
+    }
+}
+
+/* .explore-menu {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -69,4 +485,4 @@
     .explore-menu h1 {
         font-size: 17px;
     }
-}
+} */
