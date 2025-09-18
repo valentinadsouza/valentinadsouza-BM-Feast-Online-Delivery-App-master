@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./FeedbackForm.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+//This is a feedback form for customer to add on their features that they need to help them know and write what they want 
 export default function Feedback() {
   const [rating, setRating] = useState(0);
   const [submitting, setSubmitting] = useState(false);
