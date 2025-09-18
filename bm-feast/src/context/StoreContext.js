@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState,useEffect } from "react";
 import { food_list } from "../assets/assets";
 
 export const StoreContext = createContext(null);
@@ -6,9 +6,20 @@ export const StoreContext = createContext(null);
 const StoreContextProvider = (props) => {
     const [cartItems, setCartItems] = useState({});
     const [searchTerm, setSearchTerm] = useState("");
-
+    // const [favorites, setFavorites] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+    // useEffect(() => {
+ 
+ 
+    // Load favorites
+//     const storedFavorites = localStorage.getItem("favorites");
+//     if (storedFavorites) {
+//       setFavorites(JSON.parse(storedFavorites));
+//     }
+//   }, []);
+//     useEffect(() => {
+//     localStorage.setItem("favorites", JSON.stringify(favorites));
+//   }, [favorites]);
     const addToCart = (itemId) => {
         if (!cartItems[itemId]) {
             setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
@@ -17,6 +28,7 @@ const StoreContextProvider = (props) => {
         }
     };
 
+    
     const removeFromCart = (itemId) => {
         setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
     };
