@@ -39,7 +39,7 @@ const reviews = [
 
 const Reviews = () => {
   return (
-    <div className="reviews-section" id="customer-reviews">
+    <div  className="reviews-section" id="customer-reviews">
       <h2>What Our Customers Say</h2>
       <div className="reviews-container">
         {reviews.map((review, index) => (
