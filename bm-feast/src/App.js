@@ -6,6 +6,8 @@ import Cart from './Pages/Cart/Cart.js'
 import PlaceOrder from './Pages/PlaceOrder/PlaceOrder.js'
 import Footer from './Components/Footer/Footer.js'
 import LoginPopup from './Components/LoginPopup/LoginPopup.js'
+import Reviews from './Pages/Review/Review.jsx'
+import Feedback from './Components/Feedback/FeedbackForm.jsx'
 
 const App = () => {
 
@@ -22,6 +24,8 @@ const App = () => {
           <Route path='/order' element={<PlaceOrder />} />
         </Routes>
       </div>
+      <Reviews/>
+      <Feedback/>
       <Footer/>
     </>
 
